@@ -5,4 +5,5 @@ public interface WDFComponent {
   double getReflectedWave();
   void computeWave();
   double getPortResistance();
+  double getIncidentWave(); // Add this
 }

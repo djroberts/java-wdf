@@ -43,4 +43,9 @@ public class SeriesAdapter implements WDFComponent {
   public double getPortResistance() {
     return portResistance;
   }
+
+  @Override
+  public double getIncidentWave() {
+    return incidentWave;
+  }
 }

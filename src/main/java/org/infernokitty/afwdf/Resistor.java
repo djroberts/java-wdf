@@ -31,11 +31,20 @@ public class Resistor implements WDFComponent {
 
   @Override
   public void computeWave() {
-    reflectedWave = 0; // Ideal series resistor reflects nothing itself
+    reflectedWave = 0; // Series resistor reflects nothing directly
   }
 
   @Override
   public double getPortResistance() {
     return portResistance;
+  }
+
+  @Override
+  public double getIncidentWave() {
+    return incidentWave;
+  }
+
+  public double getResistance() {
+    return resistance;
   }
 }

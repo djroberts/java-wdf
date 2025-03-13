@@ -1,19 +1,19 @@
 package org.infernokitty.afwdf;
 
-public class Capacitor implements WDFComponent {
+public class Inductor implements WDFComponent {
 
-  private double capacitance;
+  private double inductance;
   private double sampleRate;
   private double portResistance;
   private double incidentWave;
   private double reflectedWave;
   private double previousIncidentWave;
 
-  public Capacitor(double capacitance, double sampleRate) {
-    this.capacitance = capacitance > 0 ? capacitance : 1e-6;
+  public Inductor(double inductance, double sampleRate) {
+    this.inductance = inductance > 0 ? inductance : 1e-3;
     this.sampleRate = sampleRate > 0 ? sampleRate : 1000;
     double samplingPeriod = 1.0 / this.sampleRate;
-    this.portResistance = samplingPeriod / (2 * capacitance);
+    this.portResistance = (2 * inductance) / samplingPeriod;
     this.previousIncidentWave = 0;
   }
 
@@ -40,7 +40,11 @@ public class Capacitor implements WDFComponent {
   }
 
   @Override
-  public double getIncidentWave() {
+  public double getIncidentWave() { // Implement this
     return incidentWave;
+  }
+
+  public double getInductance() {
+    return inductance;
   }
 }

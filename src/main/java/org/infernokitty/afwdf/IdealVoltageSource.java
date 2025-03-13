@@ -4,7 +4,7 @@ public class IdealVoltageSource implements WDFComponent {
 
   private double voltage;
   private double reflectedWave;
-  private final double portResistance = 0; // Ideal source
+  private final double portResistance = 0;
 
   public IdealVoltageSource(double voltage) {
     this.voltage = voltage;
@@ -12,7 +12,7 @@ public class IdealVoltageSource implements WDFComponent {
 
   @Override
   public void setIncidentWave(double incidentWave) {
-    this.reflectedWave = incidentWave; // Captures feedback if used
+    this.reflectedWave = incidentWave;
   }
 
   @Override
@@ -21,13 +21,16 @@ public class IdealVoltageSource implements WDFComponent {
   }
 
   @Override
-  public void computeWave() {
-    // No computation needed; voltage drives directly
-  }
+  public void computeWave() {}
 
   @Override
   public double getPortResistance() {
-    return portResistance; // Always 0
+    return portResistance;
+  }
+
+  @Override
+  public double getIncidentWave() {
+    return voltage; // Source outputs voltage as incident wave
   }
 
   public void setVoltage(double voltage) {
@@ -35,6 +38,6 @@ public class IdealVoltageSource implements WDFComponent {
   }
 
   public double getVoltage() {
-    return voltage; // Drives the filter
+    return voltage;
   }
 }

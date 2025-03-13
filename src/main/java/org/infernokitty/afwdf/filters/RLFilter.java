@@ -2,21 +2,21 @@ package org.infernokitty.afwdf.filters;
 
 import org.infernokitty.afwdf.*;
 
-public class RCFilter {
+public class RLFilter {
 
   private IdealVoltageSource source;
   private Resistor resistor;
-  private Capacitor capacitor;
+  private Inductor inductor;
   private SeriesAdapter filter;
-  private static final double BASE_RESISTANCE = 1000;
-  private static final double CAPACITANCE = 1e-6;
+  private static final double BASE_RESISTANCE = 1000; // 1kΩ
+  private static final double INDUCTANCE = 1e-3; // 1mH
 
-  public RCFilter(double sampleRate) {
+  public RLFilter(double sampleRate) {
     double validSampleRate = sampleRate > 0 ? sampleRate : 1000;
     this.source = new IdealVoltageSource(0.0);
     this.resistor = new Resistor(BASE_RESISTANCE);
-    this.capacitor = new Capacitor(CAPACITANCE, validSampleRate);
-    this.filter = new SeriesAdapter(resistor, capacitor);
+    this.inductor = new Inductor(INDUCTANCE, validSampleRate);
+    this.filter = new SeriesAdapter(resistor, inductor);
   }
 
   public double process(double input, double cutoff) {
@@ -30,8 +30,9 @@ public class RCFilter {
     source.setVoltage(input);
     filter.setIncidentWave(source.getVoltage());
 
-    double a = capacitor.getIncidentWave();
-    double b = capacitor.getReflectedWave(); // Fix: was getReflectedWavePublic
+    // Voltage across inductor
+    double a = inductor.getIncidentWave();
+    double b = inductor.getReflectedWave();
     return (a + b) * 0.5;
   }
 }
