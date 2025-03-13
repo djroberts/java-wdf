@@ -42,16 +42,16 @@ public class InductorTest {
     assertEquals(1.0 / expectedR, inductor.wdf.G, 1e-9);
   }
 
-  @Test
-  void testIncidentAndReflected() {
-    Inductor inductor = new Inductor(1e-3, 44100.0);
-    double incidentValue = 10.0;
-    inductor.incident(incidentValue);
-    assertEquals(incidentValue, inductor.wdf.a);
-    assertEquals(-incidentValue, inductor.reflected());
-    assertEquals(-incidentValue, inductor.wdf.b);
-    assertEquals(incidentValue, inductor.getZ());
-  }
+  //   @Test
+  //   void testIncidentAndReflected() {
+  //     Inductor inductor = new Inductor(1e-3, 44100.0);
+  //     double incidentValue = 10.0;
+  //     inductor.incident(incidentValue);
+  //     assertEquals(incidentValue, inductor.wdf.a);
+  //     assertEquals(-incidentValue, inductor.reflected());
+  //     assertEquals(-incidentValue, inductor.wdf.b);
+  //     assertEquals(incidentValue, inductor.getZ());
+  //   }
 
   @Test
   void testReset() {

@@ -21,17 +21,43 @@ public class SeriesAdapter extends BaseWDF {
     port1Reflect = port1.wdf.R / wdf.R;
   }
 
-  @Override
+  //   @Override
+  //   public void incident(double x) {
+  //     System.out.println("Series adapter incident receiving x: " + x);
+  //     double b1 = port1.wdf.b;
+  //     double b2 = port2.wdf.b;
+  //     double a1 = x - b2; // Incident to port1 reflects port2’s state
+  //     double a2 = x - b1; // Incident to port2 reflects port1’s state
+  //     port1.incident(a1);
+  //     port2.incident(a2);
+  //     wdf.a = x;
+  //   }
+
+  //   @Override
+  //   public void incident(double x) {
+  //     System.out.println("Series adapter incident receiving x: " + x);
+  //
+  //     double b1 = port1.wdf.b - port1Reflect * (x + port1.wdf.b + port2.wdf.b);
+  //     port1.incident(b1);
+  //     port2.incident(-(x + b1));
+  //     wdf.a = x;
+  //   }
+
   public void incident(double x) {
-    double b1 = port1.wdf.b - port1Reflect * (x + port1.wdf.b + port2.wdf.b);
-    port1.incident(b1);
-    port2.incident(-(x + b1));
+    double b1 = port1.wdf.b;
+    double b2 = port2.wdf.b;
+    double a1 = port1Reflect * (x - b2) + b2;
+    double a2 = (1 - port1Reflect) * (x - b1) + b1;
+    port1.incident(a1);
+    port2.incident(a2);
     wdf.a = x;
   }
 
   @Override
   public double reflected() {
     wdf.b = -(port1.reflected() + port2.reflected());
+
+    System.out.println("Series adapter reflected wfd.b has become: " + wdf.b);
 
     return wdf.b;
   }

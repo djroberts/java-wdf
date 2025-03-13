@@ -3,13 +3,13 @@ package org.infernokitty.wdf;
 public class Inductor extends BaseWDF {
 
   private double L_value;
-  private double z;
+  private double z; // State variable (previous incident wave)
   private double fs;
 
   public Inductor(double inductance, double sampleRate) {
     L_value = inductance;
     fs = sampleRate;
-    z = 0.0;
+    z = 0.0; // Initialize state to 0
     calcImpedance();
   }
 
@@ -22,7 +22,7 @@ public class Inductor extends BaseWDF {
   @Override
   public void reset() {
     super.reset();
-    z = 0.0;
+    z = 0.0; // Reset state
   }
 
   public void setInductanceValue(double newL) {
@@ -35,19 +35,20 @@ public class Inductor extends BaseWDF {
 
   @Override
   public void calcImpedance() {
-    wdf.R = 2.0 * L_value * fs;
+    wdf.R = 2.0 * L_value * fs; // WDF inductor impedance
     wdf.G = 1.0 / wdf.R;
   }
 
   @Override
   public void incident(double x) {
-    wdf.a = x;
-    z = wdf.a;
+    wdf.a = x; // Store incident wave
+    // z retains previous state until reflected() is called
   }
 
   @Override
   public double reflected() {
-    wdf.b = -z;
+    wdf.b = -z; // Reflect previous state
+    z = wdf.a; // Update state with current incident wave for next sample
     return wdf.b;
   }
 
