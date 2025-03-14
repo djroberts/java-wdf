@@ -5,8 +5,8 @@ import org.infernokitty.afwdf.*;
 public class LRFilter {
 
   private IdealVoltageSource source;
-  private Inductor inductor; // First
-  private Resistor resistor; // Second
+  private Inductor inductor;
+  private Resistor resistor;
   private SeriesAdapter filter;
   private static final double BASE_RESISTANCE = 1000;
   private static final double INDUCTANCE = 1e-3;
@@ -22,7 +22,7 @@ public class LRFilter {
   public double process(double input, double cutoff) {
     cutoff = Math.max(0.0, Math.min(1.0, cutoff));
     double minResistance = 1.0;
-    double maxResistance = 100.0;
+    double maxResistance = 1000.0;
     double scaledResistance =
       minResistance + (maxResistance - minResistance) * (1.0 - cutoff);
 

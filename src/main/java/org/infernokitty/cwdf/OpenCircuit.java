@@ -1,12 +1,14 @@
-package org.infernokitty.wdf;
+package org.infernokitty.cwdf;
 
-public class IdealOpen extends BaseWDF {
+public class OpenCircuit extends BaseWDF {
 
-  @Override
-  public void calcImpedance() {
+  public OpenCircuit() {
     wdf.R = Double.POSITIVE_INFINITY;
     wdf.G = 0.0;
   }
+
+  @Override
+  public void calcImpedance() {}
 
   @Override
   public void incident(double x) {
@@ -18,5 +20,10 @@ public class IdealOpen extends BaseWDF {
     wdf.b = wdf.a;
 
     return wdf.b;
+  }
+
+  @Override
+  public void reset() {
+    super.reset();
   }
 }

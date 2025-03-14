@@ -1,6 +1,6 @@
 package org.infernokitty.filters;
 
-import org.infernokitty.wdf.*;
+import org.infernokitty.cwdf.*;
 
 public class WDFRCFilter {
 

@@ -31,7 +31,7 @@ public class Resistor implements WDFComponent {
 
   @Override
   public void computeWave() {
-    reflectedWave = 0; // Series resistor reflects nothing directly
+    reflectedWave = 0;
   }
 
   @Override

@@ -22,7 +22,7 @@ public class RLFilter {
   public double process(double input, double cutoff) {
     cutoff = Math.max(0.0, Math.min(1.0, cutoff));
     double minResistance = 1.0;
-    double maxResistance = 10000.0;
+    double maxResistance = 1000.0;
     double scaledResistance =
       minResistance + (maxResistance - minResistance) * (1.0 - cutoff);
 
@@ -30,7 +30,6 @@ public class RLFilter {
     source.setVoltage(input);
     filter.setIncidentWave(source.getVoltage());
 
-    // Voltage across inductor
     double a = inductor.getIncidentWave();
     double b = inductor.getReflectedWave();
     return (a + b) * 0.5;

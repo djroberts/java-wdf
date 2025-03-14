@@ -1,6 +1,6 @@
 package runtimetests;
 
-import org.infernokitty.wdf.*;
+import org.infernokitty.cwdf.*;
 
 public class Feedback {
 

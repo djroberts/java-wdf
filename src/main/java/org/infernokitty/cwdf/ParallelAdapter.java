@@ -1,4 +1,4 @@
-package org.infernokitty.wdf;
+package org.infernokitty.cwdf;
 
 public class ParallelAdapter extends BaseWDF {
 

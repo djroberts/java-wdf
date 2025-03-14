@@ -40,7 +40,7 @@ public class Inductor implements WDFComponent {
   }
 
   @Override
-  public double getIncidentWave() { // Implement this
+  public double getIncidentWave() {
     return incidentWave;
   }
 

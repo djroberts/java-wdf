@@ -1,4 +1,4 @@
-package org.infernokitty.wdf;
+package org.infernokitty.cwdf;
 
 import static org.junit.jupiter.api.Assertions.*;
 
