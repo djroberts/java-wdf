@@ -1,8 +1,8 @@
-package examples.filters;
+package examples.cwdf.filters;
 
-import org.infernokitty.filters.*;
+import org.infernokitty.cwdf.filters.*;
 
-public class WDFRCRCFilterRun {
+public class RCRCFilterRun {
 
   public static void main(String[] args) {
     double sampleRate = 48000.0;

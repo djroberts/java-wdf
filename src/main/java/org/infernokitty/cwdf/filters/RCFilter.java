@@ -1,8 +1,8 @@
-package org.infernokitty.filters;
+package org.infernokitty.cwdf.filters;
 
 import org.infernokitty.cwdf.*;
 
-public class WDFRCFilter {
+public class RCFilter {
 
   private IdealVoltageSource vs;
   private Resistor r;
@@ -10,7 +10,7 @@ public class WDFRCFilter {
   private SeriesAdapter sa;
   private double sampleRate;
 
-  public WDFRCFilter(double baseSampleRate, int oversampleFactor) {
+  public RCFilter(double baseSampleRate, int oversampleFactor) {
     sampleRate = (double) oversampleFactor * baseSampleRate;
     c = new Capacitor(0.000001, sampleRate); // 1 µF
     r = new Resistor(7958.0); // Initial 7958 Ω (20 Hz)

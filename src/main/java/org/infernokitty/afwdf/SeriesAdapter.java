@@ -2,8 +2,8 @@ package org.infernokitty.afwdf;
 
 public class SeriesAdapter implements WDFComponent {
 
-  private WDFComponent component1;
-  private WDFComponent component2;
+  private WDFComponent component1; // Resistor
+  private WDFComponent component2; // Capacitor
   private double incidentWave;
   private double reflectedWave;
   private double portResistance;
@@ -11,6 +11,10 @@ public class SeriesAdapter implements WDFComponent {
   public SeriesAdapter(WDFComponent component1, WDFComponent component2) {
     this.component1 = component1;
     this.component2 = component2;
+    updatePortResistance();
+  }
+
+  private void updatePortResistance() {
     this.portResistance =
       component1.getPortResistance() + component2.getPortResistance();
   }
@@ -28,12 +32,13 @@ public class SeriesAdapter implements WDFComponent {
 
   @Override
   public void computeWave() {
-    double R1 = component1.getPortResistance();
-    double R2 = component2.getPortResistance();
+    updatePortResistance();
+    double R1 = component1.getPortResistance(); // Resistor
+    double R2 = component2.getPortResistance(); // Capacitor
     double totalR = R1 + R2;
 
     double b2 = component2.getReflectedWave();
-    double a2 = incidentWave * (R2 / totalR) + b2 * (R1 / totalR);
+    double a2 = incidentWave * (R2 / totalR) + b2 * (R1 / totalR); // Capacitor voltage
     component2.setIncidentWave(a2);
     reflectedWave = component2.getReflectedWave();
     component1.setIncidentWave(incidentWave - reflectedWave);

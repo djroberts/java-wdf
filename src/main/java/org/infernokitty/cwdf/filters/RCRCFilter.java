@@ -1,8 +1,8 @@
-package org.infernokitty.filters;
+package org.infernokitty.cwdf.filters;
 
 import org.infernokitty.cwdf.*;
 
-public class WDFRCRCFilter {
+public class RCRCFilter {
 
   private IdealVoltageSource vs;
   private Resistor r1, r2;
@@ -13,7 +13,7 @@ public class WDFRCRCFilter {
   private double feedbackBuffer;
   private SeriesAdapter feedbackSeriesAdapter;
 
-  public WDFRCRCFilter(double baseSampleRate, int oversampleFactor) {
+  public RCRCFilter(double baseSampleRate, int oversampleFactor) {
     sampleRate = (double) oversampleFactor * baseSampleRate;
     c1 = new Capacitor(0.000001, sampleRate);
     c2 = new Capacitor(0.000001, sampleRate);

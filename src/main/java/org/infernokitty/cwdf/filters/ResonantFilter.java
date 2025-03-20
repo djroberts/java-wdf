@@ -1,8 +1,8 @@
-package org.infernokitty.filters;
+package org.infernokitty.cwdf.filters;
 
 import org.infernokitty.cwdf.*;
 
-public class WDFResonantFilter {
+public class ResonantFilter {
 
   private ResistiveVoltageSource vs; // Changed to ResistiveVoltageSource
   private Resistor r;
@@ -12,7 +12,7 @@ public class WDFResonantFilter {
   private SeriesAdapter sa2;
   private double sampleRate;
 
-  public WDFResonantFilter(double baseSampleRate, int oversampleFactor) {
+  public ResonantFilter(double baseSampleRate, int oversampleFactor) {
     sampleRate = (double) oversampleFactor * baseSampleRate;
     c = new Capacitor(1e-6, sampleRate); // 1 uF
     l = new Inductor(1e-3, sampleRate); // 1 mH

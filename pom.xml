@@ -56,33 +56,33 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <mainClass>org.infernokitty.examples.WDFRCFilterRun</mainClass>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <executions>
+          <!-- Ensure npm install runs before anything else -->
+          <execution>
+            <id>npm-install</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>npm</executable>
+              <arguments>
+                <argument>install</argument>
+              </arguments>
+            </configuration>
+          </execution>
+
+          <!-- Run Prettier from local node_modules -->
           <execution>
             <id>format-code</id>
-            <phase>validate</phase>  <goals>
-            <goal>exec</goal>
-          </goals>
+            <phase>validate</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
             <configuration>
-              <executable>npx</executable>
+              <executable>${project.basedir}/node_modules/.bin/prettier</executable>
               <arguments>
-                <argument>prettier</argument>
                 <argument>--write</argument>
                 <argument>--plugin=prettier-plugin-java</argument>
                 <argument>./src</argument>

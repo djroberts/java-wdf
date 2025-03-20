@@ -29,9 +29,23 @@ public class RCFilter {
     resistor.setResistance(scaledResistance);
     source.setVoltage(input);
     filter.setIncidentWave(source.getVoltage());
+    filter.computeWave(); // Ensure wave propagation happens
 
     double a = capacitor.getIncidentWave();
-    double b = capacitor.getReflectedWave(); // Fix: was getReflectedWavePublic
-    return (a + b) * 0.5;
+    double b = capacitor.getReflectedWave();
+    double output = (a + b) * 0.5;
+
+    // Debug output to trace wave propagation
+    System.out.printf(
+      "Input: %.3f, a_res: %.3f, b_res: %.3f, a_cap: %.3f, b_cap: %.3f, Output: %.3f%n",
+      input,
+      resistor.getIncidentWave(),
+      resistor.getReflectedWave(),
+      capacitor.getIncidentWave(),
+      capacitor.getReflectedWave(),
+      output
+    );
+
+    return output;
   }
 }
